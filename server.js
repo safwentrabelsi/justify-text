@@ -32,7 +32,7 @@ app.use(function(req, res, next){
     }
   });
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "front-test-app", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "justify-front", "build", "index.html"));
 });
 
 //starting the server

@@ -25,7 +25,7 @@ class Justify extends Component {
               'Content-Type': 'text/plain',
               'x-access-token': localStorage.getItem('token')
             }
-            axios.post('https://justify-back.herokuapp.com/api/justify',this.state.email).then(data=>{ 
+            axios.post('https://justification-text.herokuapp.com/api/justify',this.state.email).then(data=>{ 
                 this.justifiedText=(
                     <div className="container">
                         <div className="post card" >
@@ -50,7 +50,7 @@ class Justify extends Component {
         axios.defaults.headers = {
             'Content-Type': 'application/json'
         }
-        axios.post('https://justify-back.herokuapp.com/api/token',this.state).then(data=>{
+        axios.post('https://justification-text.herokuapp.com/api/token',this.state).then(data=>{
             if(data.data.token){          
                 localStorage.setItem("token",data.data.token)
             }
