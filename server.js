@@ -19,8 +19,10 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "justify-front/build")))
 
 const port = process.env.PORT 
-
-//express ne suporte pas le content-type text/plain par défaut
+app.listen(port,() =>{
+    console.log('server started on port '+port);
+});
+//express ne supporte pas le content-type text/plain par défaut
 app.use(function(req, res, next){
     if (req.is('text/*')) {
       req.text = '';
@@ -36,9 +38,7 @@ app.get("*", (req, res) => {
 });
 
 //starting the server
-app.listen(port,() =>{
-    console.log('server started on port '+port);
-});
+
 
 //creation du token utilisant l'email envoyé
 app.post('/api/token',(req,res)=>{
