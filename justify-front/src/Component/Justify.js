@@ -97,6 +97,9 @@ class Justify extends Component {
                     value={this.state.email}    
                     placeholder="text to justify" required></textarea>
                     <button type="submit" className="btn waves-effect black"  disabled={this.notAuth} >submit</button>
+                    <br></br><br></br>
+                    <button onClick={this.newEmail} id="showEmail" className="btn waves-effect black"  >New email?</button>
+                    
                 </form>
                 )
         return(
