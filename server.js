@@ -63,6 +63,6 @@ app.post('/api/justify',(req,res)=>{
       
       if(expiration[token][0]-length<0) return res.sendStatus(402)
       res.status(200).send(textJustification(array));
-      expiration[token]=expiration[token]-length
+      expiration[token][0] = expiration[token][0]-length
     });
 })
