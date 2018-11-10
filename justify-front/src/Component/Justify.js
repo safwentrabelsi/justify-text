@@ -44,7 +44,17 @@ class Justify extends Component {
                         document.getElementById("showForm").classList.add("opened")
                     })
                 }else{
-                    if(data.status==402) this.justifiedText=(<h3>you need to pay to continue</h3>)
+                    if(data.status==402){ 
+                        this.justifiedText=(<h3>you need to pay to continue</h3>)
+                        this.setState({
+                            email:'',
+                        },()=>{
+                            //Hide Form and Show message on submit
+                            document.getElementById("slider").classList.add("closed")
+                            document.getElementById("oppositeSlider").classList.add("opened")
+                            document.getElementById("showForm").classList.add("opened")
+                        })
+                    }
                 }
             })
             
