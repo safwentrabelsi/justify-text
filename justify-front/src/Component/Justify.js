@@ -46,6 +46,7 @@ class Justify extends Component {
                 }else{
                     if(data.status==402){
                         this.justifiedText = ( <h3>you need to pay to continue</h3> );
+                        console.log(this.justifiedText)
                         this.setState({
                             email:'',
                     },()=>{
