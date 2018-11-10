@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const textJustification = require('./services/justifierText'); //methode de la justification
-var email=''
 var expiration = {}
 
 //fonction de validation de l'email avec une expression régulière
@@ -45,8 +44,7 @@ app.get("*", (req, res) => {
 app.post('/api/token',(req,res)=>{
     if(validateEmail(req.body.email)){
         var token = jwt.sign(req.body, req.body.email, {expiresIn: 60*60*24 });
-        expiration[token]=80000
-        email=req.body.email;
+        expiration[token]=[80000,req.body.email]
         res.status(200).send({ token: token });
     }else{
         res.sendStatus(500)
@@ -58,12 +56,12 @@ app.post('/api/token',(req,res)=>{
 app.post('/api/justify',(req,res)=>{
     var token = req.headers['x-access-token'];
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-    jwt.verify(token,email , function(err, decoded) {
+    jwt.verify(token,expiration[token][1] , function(err, decoded) {
       if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       var array = req.text.split(" ");
       var length = array.length
-      console.log(expiration[token])
-      if(expiration[token]-length<0) return res.sendStatus(402)
+      
+      if(expiration[token][0]-length<0) return res.sendStatus(402)
       res.status(200).send(textJustification(array));
       expiration[token]=expiration[token]-length
     });
