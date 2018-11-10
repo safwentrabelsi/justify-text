@@ -26,23 +26,30 @@ class Justify extends Component {
               'x-access-token': localStorage.getItem('token')
             }
             axios.post('https://justification-text.herokuapp.com/api/justify',this.state.email).then(data=>{ 
-                this.justifiedText=(
-                    <div className="container">
-                        <div className="post card" >
-                            <div className="card-content">
-                                <pre>{data.data}</pre>
+                if(data.status==200){
+                    this.justifiedText=(
+                        <div className="container">
+                            <div className="post card" >
+                                <div className="card-content">
+                                    <pre>{data.data}</pre>
+                                </div>
                             </div>
-                        </div>
-                    </div>)
-                this.setState({
-                    email:'',
-                },()=>{
-                    //Hide Form and Show message on submit
-                    document.getElementById("slider").classList.add("closed")
-                    document.getElementById("oppositeSlider").classList.add("opened")
-                    document.getElementById("showForm").classList.add("opened")
-                })
+                        </div>)
+                    this.setState({
+                        email:'',
+                    },()=>{
+                        //Hide Form and Show message on submit
+                        document.getElementById("slider").classList.add("closed")
+                        document.getElementById("oppositeSlider").classList.add("opened")
+                        document.getElementById("showForm").classList.add("opened")
+                    })
+                }else{
+                    if(data.status==402) this.justifiedText=(<h3>you need to pay to continue</h3>)
+                }
             })
+            
+
+            }
     }
     handeSubmitEmail = (e)=>{
         e.preventDefault()
