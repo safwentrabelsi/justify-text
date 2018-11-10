@@ -26,7 +26,6 @@ class Justify extends Component {
               'x-access-token': localStorage.getItem('token')
             }
             axios.post('https://justification-text.herokuapp.com/api/justify',this.state.email).then(data=>{ 
-                try{
                     this.justifiedText=(
                         <div className="container">
                             <div className="post card" >
@@ -43,19 +42,6 @@ class Justify extends Component {
                         document.getElementById("oppositeSlider").classList.add("opened")
                         document.getElementById("showForm").classList.add("opened")
                     })
-                }catch(e){
-                    if(data.status==402){
-                        this.justifiedText = ( <h3>{e}</h3> );
-                        this.setState({
-                            email:'',
-                    },()=>{
-                         //Hide Form and Show message on submit
-                        document.getElementById("slider").classList.add("closed")
-                        document.getElementById("oppositeSlider").classList.add("opened")
-                        document.getElementById("showForm").classList.add("opened")
-                    })
-                }
-            }
         })
     }
     
