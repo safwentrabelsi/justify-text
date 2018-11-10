@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const textJustification = require('./services/justifierText'); //methode de la justification
 var email=''
 var expiration = {}
