@@ -16,7 +16,7 @@ function validateEmail(email) {
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "front-test-app/build")))
+app.use(express.static(path.join(__dirname, "justify-front/build")))
 
 const port = process.env.PORT 
 
